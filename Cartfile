@@ -1,0 +1,3 @@
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-core"
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-security"
+github "ibm-bluemix-mobile-services/bluemix-objectstorage-clientsdk-swift" "master"
