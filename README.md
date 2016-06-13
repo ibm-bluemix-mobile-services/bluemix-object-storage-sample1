@@ -15,13 +15,29 @@ Clone the sample from GitHub using the following command:
 
 `git clone https://github.com/ibm-bluemix-mobile-services/`
 
+### Create Object Storage instance
+Object Storage credentials are used by both the sample iOS app and the custom identity provider. Before setting up either of these, an instance of the Object Storage service will need to be created.
+
+Create an instance of the Object Storage service:
+
+1. From the Storage section of the Bluemix Catalog, create an instance of the Object Storage
+2. When the service has been created, navigate to the Service Credentials tab
+3. Make note of the projectId
+
 ### Configure the custom identity provider
 Before running the sample iOS application an instance of the Mobile Client Access service will need to be created along with an instance of the Object Storage service. This identity provider will need to be configured in order to work with the Object Storage instance you created in the previous step.
 
 Open `custom-identity-provider/app.js` and edit the userRepository object to contain the iOS application 'users.'
 
+Deploy the custom identity provider to bluemix
+
+1. Navigate to the `custom-identity-provider` directory
+2. Open `manifest.yml` and edit any of the deployment parameters you wish to change
+3. Replace `<object-storage instance>` with the name of your Object Storage instance
+4. Run `cf push` using the cloud foundry cli
+
 ### Set-up Mobile Client Access
-Deploy the custom identity provider to Bluemix. After successfully deploying the custom identity provider an instance of Mobile Client Access will need to be created and bound to the identity provider
+After successfully deploying the custom identity provider an instance of Mobile Client Access will need to be created and bound to the identity provider
 
 Create an instance of Mobile Client Access:
 
@@ -29,14 +45,15 @@ Create an instance of Mobile Client Access:
 2. Bind the service instance to the custom identity provider just deployed
 3. Setup the custom identity provider with Mobile Client Access
 
-### Create Object Storage instance
-Object Storage credentials are used by both the sample iOS app and the custom identity provider. Before setting up either of these, an instance of the Object Storage service will need to be created.
+## Configuring Mobile Client Access service
 
-Create an instance of the Object Storage service:
+1. To configure your Mobile Client Access service to use a newly deployed Custom Identity Provider. Open the Mobile Client Access Dashboard and enable Custom Authentication.
 
-1. From the Storage section of the Bluemix Catalog, create an instance of the Object Storage service and bind it the custom identity provider previously deployed
-2. When the service has been created, navigate to the Service Credentials tab
-3. Make note of the projectId
+2. Use any alphanumerical string as `Realm name`. Keep a note of `Realm name`, you will need it to configure authentication in the Mobile Client Access SDK later.
+
+3. Use the URL of a previously deployed Custom Identity Provider as `URL`
+
+	> For more details about configuring Mobile Client Access service and mobile apps to use Custom Identity Providers and read [this documentation article. ](https://console.ng.bluemix.net/docs/services/mobileaccess/custom-auth-config-mca.html)
 
 ### Configure the sample iOS application
 Build the project and necessary dependencies using either Cocoapods. Edit the `Podfile` as follows:
