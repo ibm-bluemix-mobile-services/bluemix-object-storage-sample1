@@ -7,7 +7,8 @@ var Q = require('q');
 
 // Using hardcoded user repository
 
-var credentials = cfev.getAppEnv.getServiceCreds('Object-Storage');
+var appEnv = cfenv.getAppEnv;
+var credentials = appEnv.getServiceCreds('<object-storage-instance>');
 var objectStorageProjectId = credentials['projectId'];
 var objectStorageUserId = credentials['userId'];
 var objectStoragePassword = credentials['password'];
