@@ -7,7 +7,7 @@ var Q = require('q');
 
 // Using hardcoded user repository
 
-var appEnv = cfenv.getAppEnv;
+var appEnv = cfenv.getAppEnv();
 var credentials = appEnv.getServiceCreds('<object-storage-instance>');
 var objectStorageProjectId = credentials['projectId'];
 var objectStorageUserId = credentials['userId'];
@@ -16,6 +16,13 @@ var objectStoragePassword = credentials['password'];
 var userRepository = {
 	"<mca-username>": { password:"<mca-password>", displayName:"", dob:""}
 }
+
+var challengeJson = {
+	status: "challenge",
+	challenge: {
+		text: "Enter username and password"
+	}
+};
 
 var app = express();
 var logger = log4js.getLogger("CustomIdentityProviderApp");
@@ -30,14 +37,7 @@ app.post('/apps/:tenantId/:realmName/startAuthorization', jsonParser, function(r
 
 	logger.debug("startAuthorization", tenantId, realmName, headers);
 
-	var responseJson = {
-		status: "challenge",
-		challenge: {
-			text: "Enter username and password"
-		}
-	};
-
-	res.status(200).json(responseJson);
+	res.status(200).json(challengeJson);
 });
 
 app.post('/apps/:tenantId/:realmName/handleChallengeAnswer', jsonParser, function(req, res){
@@ -46,40 +46,39 @@ app.post('/apps/:tenantId/:realmName/handleChallengeAnswer', jsonParser, functio
 	var realmName = req.params.realmName;
 	var challengeAnswer = req.body.challengeAnswer;
 
-
 	logger.debug("handleChallengeAnswer", tenantId, realmName, challengeAnswer);
 
 	var username = req.body.challengeAnswer["username"];
 	var password = req.body.challengeAnswer["password"];
 
-	var responseJson = { status: "failure" };
-
 	var userObject = userRepository[username];
 
 	if (userObject && userObject.password == password ){
 		logger.debug("Login success for userId ::", username);
-		responseJson.status = "success";
 
 		getToken(userObject).then(function(data) {
-
-			responseJson.userIdentity = {
-				userName: username,
-				displayName: userObject.displayName,
-				attributes: {
-					token: data.headers["x-subject-token"],
-					dob: userObject.dob
+			var responseJson = {
+				status: "success",
+				userIdentity: {
+					userName: username,
+					displayName: userObject.displayName,
+					attributes: {
+						token: data.headers["x-subject-token"],
+						dob: userObject.dob
+					}
 				}
-			}
+			};
+
 			res.status(200).json(responseJson);
 
 		}).catch(function(err) {
 			logger.debug("Error received while fetching token for object storage");
-			res.status(200).json(responseJson);
+			res.status(200).json(challengeJson);
 		});
 
 	} else {
 		logger.debug("Login failure for userId ::", username);
-		res.status(200).json(responseJson);
+		res.status(200).json(challengeJson);
 	}
 });
 

@@ -26,9 +26,9 @@ class MyAuthDelegate: AuthenticationDelegate {
     func submitCredentials(username:String, password: String){
         
         guard let authContext = authContext else {
-            
             return
         }
+		
         let challengeAnswer:[String:AnyObject] = ["username":username, "password":password]
         authContext.submitAuthenticationChallengeAnswer(challengeAnswer)
     }
@@ -50,15 +50,11 @@ class MyAuthDelegate: AuthenticationDelegate {
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(token, forKey: "token")
-        
-        loginViewController.performSelectorOnMainThread(#selector(loginViewController.handleSuccessfulLogin), withObject: nil, waitUntilDone: false)
     }
-    
+	
     func onAuthenticationFailure(info: AnyObject?){
-        
         logger.debug("authenticaton failured. received info: \(info)")
-        
-        loginViewController.performSelectorOnMainThread(#selector(loginViewController.handleUnsuccessfulLogin), withObject: nil, waitUntilDone: false)
+        loginViewController.handleUnsuccessfulLogin()
     }
     
 }

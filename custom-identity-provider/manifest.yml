@@ -1,11 +1,7 @@
 applications:
 - disk_quota: 512M
-  host: custom-identity-provider
-  name: custom-identity-provider
-  command: node .
+  host: sample1-cidp
+  name: sample1-cidp
   instances: 1
-  memory: 512M
-  timeout: 180
-  buildpack: sdk-for-nodejs
   services:
    - <object-storage instance>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-tQ-ofa">
-                                <rect key="frame" x="201" y="285" width="200" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-tQ-ofa">
+                                <rect key="frame" x="200" y="285" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cCS-3Y-TJn"/>
                                     <constraint firstAttribute="width" constant="200" id="gaO-bI-rLR"/>
@@ -26,8 +26,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-qf-pkg">
-                                <rect key="frame" x="201" y="247" width="200" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-qf-pkg">
+                                <rect key="frame" x="200" y="247" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="lwh-Ku-iEP"/>
                                     <constraint firstAttribute="height" constant="30" id="rVb-7G-XZA"/>
@@ -72,6 +72,7 @@
                         <outlet property="loginButton" destination="hUg-nL-wA8" id="GcT-vs-wgl"/>
                         <outlet property="passwordField" destination="gj2-tQ-ofa" id="lOh-vz-Ztj"/>
                         <outlet property="usernameField" destination="3Uo-qf-pkg" id="EAA-oq-pxQ"/>
+                        <segue destination="XeJ-ER-COJ" kind="show" identifier="showNavigationController" id="JFo-m2-fmA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -82,21 +83,21 @@
         <scene sceneID="qbo-wN-THP">
             <objects>
                 <tableViewController storyboardIdentifier="PhotoList" hidesBottomBarWhenPushed="YES" id="8jm-8p-gX8" customClass="PhotoListController" customModule="bluemix_object_storage_sample1" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="225" sectionHeaderHeight="18" sectionFooterHeight="18" id="JaE-nL-Wac">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="225" sectionHeaderHeight="28" sectionFooterHeight="28" id="JaE-nL-Wac">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="44" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="225" id="8Ga-7b-T1L" customClass="PhotoCell" customModule="bluemix_object_storage_sample1" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="600" height="225"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="225"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Ga-7b-T1L" id="ofp-CY-irz">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="224.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="224"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-NY-D04">
-                                            <rect key="frame" x="8" y="8" width="584" height="209"/>
+                                            <rect key="frame" x="8" y="8" width="584" height="208"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -144,6 +145,7 @@
         <!--Navigation Controller-->
         <scene sceneID="pz2-rp-9wG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N7d-Un-n3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" toolbarHidden="NO" id="XeJ-ER-COJ" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
@@ -161,7 +163,6 @@
                         <segue destination="8jm-8p-gX8" kind="relationship" relationship="rootViewController" id="vll-4r-66p"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N7d-Un-n3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="543" y="1598"/>
         </scene>

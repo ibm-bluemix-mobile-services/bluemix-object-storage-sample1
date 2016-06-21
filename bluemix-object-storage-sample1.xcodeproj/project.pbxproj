@@ -104,12 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84FD9CCE1D0B251500F23197 /* Build configuration list for PBXNativeTarget "bluemix-object-storage-sample1" */;
 			buildPhases = (
-				356C37527706C21192FCD0E4 /* 📦 Check Pods Manifest.lock */,
+				356C37527706C21192FCD0E4 /* [CP] Check Pods Manifest.lock */,
 				84FD9CB81D0B251500F23197 /* Sources */,
 				84FD9CB91D0B251500F23197 /* Frameworks */,
 				84FD9CBA1D0B251500F23197 /* Resources */,
-				BD161D4E76DD5A5972BF7FEB /* 📦 Embed Pods Frameworks */,
-				B990175B30FF989E6D60C77E /* 📦 Copy Pods Resources */,
+				BD161D4E76DD5A5972BF7FEB /* [CP] Embed Pods Frameworks */,
+				B990175B30FF989E6D60C77E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,14 +167,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		356C37527706C21192FCD0E4 /* 📦 Check Pods Manifest.lock */ = {
+		356C37527706C21192FCD0E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,14 +182,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B990175B30FF989E6D60C77E /* 📦 Copy Pods Resources */ = {
+		B990175B30FF989E6D60C77E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,14 +197,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bluemix-object-storage-sample1/Pods-bluemix-object-storage-sample1-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BD161D4E76DD5A5972BF7FEB /* 📦 Embed Pods Frameworks */ = {
+		BD161D4E76DD5A5972BF7FEB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

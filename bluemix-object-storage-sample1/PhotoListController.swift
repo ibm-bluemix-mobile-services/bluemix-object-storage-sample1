@@ -27,80 +27,50 @@ class PhotoListController: UITableViewController, UIImagePickerControllerDelegat
     var objectList: [ObjectStorageObject]?
     
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        
+	
+	override func viewDidAppear(animated: Bool) {
         if objectStorage == nil {
             self.connect()
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController!.navigationBarHidden = true
-        self.navigationController!.toolbarHidden = false
-
-        
         cameraButton.enabled  = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
     
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-    }
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
         guard let objectList = objectList else {
-            
             return 0
         }
-        
         return objectList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
-        
         guard let objectList = objectList else {
-            
             return cell
         }
         
         let objectStorageObject = objectList[indexPath.row]
-        
         guard let data = objectStorageObject.data else {
-            
             return cell
         }
+		
         let image = UIImage(data: data)
-        
         cell.objectImage.image = image
-        
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-    }
-    
     func connect() {
-        
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let token = defaults.stringForKey("token");
-        self.objectStorage = ObjectStorage(projectId: "<projectId");
+        self.objectStorage = ObjectStorage(projectId: "012689c20a5b4e5e9f9e5c4f363cd39d");
         
         if let objectStorage = objectStorage {
             
@@ -119,9 +89,7 @@ class PhotoListController: UITableViewController, UIImagePickerControllerDelegat
     }
     
     func setContainer() {
-        
-        self.objectStorage!.retrieveContainer(name: "<container>", completionHandler: { (error, container) in
-            
+        self.objectStorage!.retrieveContainer(name: "FileContainer", completionHandler: { (error, container) in
             if let error = error {
                 self.logger.error("The following error occurred while attempting to objtain the object storage container: \(error)")
             } else {
@@ -132,19 +100,15 @@ class PhotoListController: UITableViewController, UIImagePickerControllerDelegat
     }
     
     func setObjectsList() {
-        
         guard let objectStorageContainer = objectStorageContainer else {
-            
             return
         }
         
         objectStorageContainer.retrieveObjectsList { (error, objects) in
-            
             if let error = error {
                 self.logger.error("The following error occurred while retrieving the list of objects from object storage: \(error)")
             } else {
                 self.objectList = objects
-                
                 for object in objects! {
                     self.loadData(object)
                 }
@@ -153,9 +117,7 @@ class PhotoListController: UITableViewController, UIImagePickerControllerDelegat
     }
     
     func loadData(forObject: ObjectStorageObject) {
-        
         forObject.load(shouldCache: true) { (error, data) in
-            
             if let error = error {
                 self.logger.error("The following error occurred while loading an object from the object storage service: \(error)")
             } else {
@@ -165,41 +127,32 @@ class PhotoListController: UITableViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func onPhotoLibrary(sender: AnyObject) {
-        
         let imagePicker:UIImagePickerController = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.delegate = self
-        
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
 
     @IBAction func onCamera(sender: AnyObject) {
-        
         let imagePicker:UIImagePickerController = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.delegate = self
-        
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
-        
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
         let image: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
         let now = NSDate().timeIntervalSince1970
         let imageName = (theFuture - now) * 1000
         
-        objectStorageContainer?.storeObject(name: "\(imageName)", data: UIImageJPEGRepresentation(image, 0.7)!, completionHandler: { (error, object) in
-            
+        objectStorageContainer?.storeObject(name: "\(imageName)", data: UIImageJPEGRepresentation(image, 0.5)!, completionHandler: { (error, object) in
             if let error = error {
                 self.logger.error("The following error occurred while loading an image into the object storage service: \(error)")
             } else {
-                
                 self.setObjectsList()
             }
         })
